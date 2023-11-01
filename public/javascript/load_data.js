@@ -1,5 +1,7 @@
 import {tiempoArr, precipitacionArr, uvArr, temperaturaArr} from './static_data.js';
 
+
+
 let fechaActual = () => new Date().toISOString().slice(0,10);
 
 let cargarPrecipitacion = () => {
@@ -101,9 +103,117 @@ let cargarPrecipitacion = () => {
      //Actualice la referencia al elemento h6 con el valor de la función fechaActual()
     tituloH6.textContent = fechaActual()
   }
+  let cargarOpenMeteo = () => {
+
+    //URL que responde con la respuesta a cargar
+    let URL_TEMPERATURA = 'https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&hourly=temperature_2m&timezone=auto&forecast_days=1'; 
+    let URL_HUMEDAD = 'https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&hourly=relativehumidity_2m&timezone=auto&past_days=1';
+    fetch( URL_TEMPERATURA )
+      .then(responseText => responseText.json())
+      .then(responseJSON => {
+        
+        console.log(responseJSON);
+        
+        //Respuesta en formato JSON
+
+        //Referencia al elemento con el identificador plot
+        let plotRef = document.getElementById('plot1');
+
+        //Etiquetas del gráfico
+        let labels = responseJSON.hourly.time;
+
+        //Etiquetas de los datos
+        let data = responseJSON.hourly.temperature_2m;
+
+        //Objeto de configuración del gráfico
+        let config = {
+          type: 'line',
+          data: {
+            labels: labels, 
+            datasets: [
+              {
+                label: 'Temperatura',
+                data: data,
+                fill: false,
+                borderColor: 'rgb(255, 159, 64)',
+                backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                borderWidth: 1,
+                pointStyle: 'rectRot',
+                pointRadius: 5,
+                pointBorderColor: 'rgb(0, 0, 0)'
+              }
+            ]
+          },
+          plugins: {
+            legend: {
+              labels: {
+                usePointStyle: true,
+              },
+            }
+          }
+        };
+
+        //Objeto con la instanciación del gráfico
+        let chart1  = new Chart(plotRef, config);
+
+    })
+    .catch(console.error);
+
+    fetch( URL_HUMEDAD )
+    .then(responseText => responseText.json())
+    .then(responseJSON => {
+      console.log(responseJSON);
+        
+      //Respuesta en formato JSON
+
+      //Referencia al elemento con el identificador plot
+      let plotRef = document.getElementById('plot2');
+
+      //Etiquetas del gráfico
+      let labels = responseJSON.hourly.time;
+
+      //Etiquetas de los datos
+      let data = responseJSON.hourly.relativehumidity_2m;
+
+      //Objeto de configuración del gráfico
+      let config = {
+        type: 'line',
+        data: {
+          labels: labels, 
+          datasets: [
+            {
+              label: 'Humedad relativa',
+              data: data,
+              fill: false,
+              borderColor: 'rgb(54, 162, 235)',
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              borderWidth: 1,
+              pointStyle: 'rectRot',
+              pointRadius: 5,
+              pointBorderColor: 'rgb(0, 0, 0)'
+            }
+          ]},
+          plugins: {
+            legend: {
+              labels: {
+                usePointStyle: true,
+              },
+            }
+          }
+        };
+
+        //Objeto con la instanciación del gráfico
+        let chart2  = new Chart(plotRef, config);
+
+      })
+      .catch(console.error);
+  
+  }
+  
  
   cargarPrecipitacion();
   cargarTemperatura();
   cargarUV();
   cargarFechaActual();
+  cargarOpenMeteo();
   
