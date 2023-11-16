@@ -12,30 +12,34 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+    <link href="/css/min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <header>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
+                <h1 id="titulo">EcuClimaticos</h1>
                 <div class="collapse navbar-collapse" id="navbarExample01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#indicadores">Indicadores</a>
+                            <a class="nav-link" href="#indicadores"><img src="img/nav-dashboard.png" alt="Icono" class="icono"/>Indicadores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#graficos">Gráficos</a>
+                            <a class="nav-link" href="#graficos"><img src="img/nav-statistics.png" alt="Icono" class="icono"/>Gráficos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#datos">Datos</a>
+                            <a class="nav-link" href="#datos"><img src="img/nav-data.png" alt="Icono" class="icono"/>Datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#monitoreos"><img src="img/nav-high-tide.png" alt="Icono" class="icono"/>Monitoreo</a>
                         </li>
 
                     </ul>
@@ -46,19 +50,21 @@
     </header>
 
     <!-- Indicadores -->
-    <section class="p-4 text-right bg-light">
-        <h4 id="indicadores" class="mb-3">
-            Indicadores
-        </h4>
-        <h6 class="mb-3">YYYY-MM-DD</h6>
-        <div class="container">
+    <section class="text-right bg-light">
+        
+        
+        <div id="primer-container" class="container">
+            <h4 id="indicadores" class="mb-3">
+                Indicadores
+            </h4>
+            <h6 id="fecha" class="mb-3">YYYY-MM-DD</h6>
             <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Precipitación</h5>
+                            <h5 class="card-title"><img src="img/rain.png" alt="Icono" class="icono"/>Precipitación</h5>
                             <p class="card-text">
-                            <ul class="list-group list-group-light">
+                            <ul class="list-group">
                                 <li id="precipitacionMinValue" class="list-group-item">Min 0.0 [mm]</li>
                                 <li id="precipitacionPromValue" class="list-group-item">Prom 0.0 [mm]</li>
                                 <li id="precipitacionMaxValue" class="list-group-item">Max 0.0 [mm]</li>
@@ -70,9 +76,9 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Uv</h5>
+                            <h5 class="card-title"><img src="img/uv.png" alt="Icono" class="icono"/>Uv</h5>
                             <p class="card-text">
-                            <ul class="list-group list-group-light">
+                            <ul class="list-group">
                                 <li id="uvMinValue" class="list-group-item">Min 0.0 [--]</li>
                                 <li id="uvPromValue" class="list-group-item">Prom 0.0 [--]</li>
                                 <li id="uvMaxValue" class="list-group-item">Max 0.0 [--]</li>
@@ -84,9 +90,9 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Temperatura</h5>
+                            <h5 class="card-title"><img src="img/temperature.png" alt="Icono" class="icono"/>Temperatura</h5>
                             <p class="card-text">
-                            <ul class="list-group list-group-light">
+                            <ul class="list-group">
                                 <li id="temperaturaMinValue" class="list-group-item">Min 0.0 [°C]</li>
                                 <li id="temperaturaPromValue" class="list-group-item">Prom 0.0 [°C]</li>
                                 <li id="temperaturaMaxValue" class="list-group-item">Max 0.0 [°C]</li>
@@ -100,22 +106,25 @@
     </section>
     <!-- Indicadores -->
     <!-- Gráficos -->
-    <section class="p-4 text-right bg-light">
-        <h4 id="graficos" class="mb-3">
-            Gráficos
-        </h4>
+    <section class="text-right bg-light">
+        
         <div class="container">
-            <div class="row d-flex justify-content-center row-cols-1 row-cols-md-1 g-4 mt-2">
-                <div class="col">
+            <h4 class="mb-3">
+                Gráficos
+            </h4>
+            <div id="graficos" class="row d-flex justify-content-center row-cols-1 row-cols-md-2 g-4 mt-2">
+                <div class="col col-plot">
                     <canvas id="plot1"></canvas>
                 </div>
-                <div class="col">
+                <div class="col col-plot">
                     <canvas id="plot2"></canvas>
                 </div>
             </div>
         </div>
     </section>
     <!-- Gráficos -->
+
+
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
@@ -127,11 +136,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Datos -->
-    <section class="p-4 text-right bg-light">
-        <h4 id="datos" class="mb-3">
-            Datos
-        </h4>
+    <section class="text-right bg-light">
+        
         <div class="container">
+            <h4 id="datos" class="mb-3">
+                Datos
+            </h4>
             <div class="row justify-content-end row-cols-6 row-cols-md-6 g-3 mt-2">
                 <div class="col">
                     <select class="form-select form-select-lg mb-3" aria-label="Default select example">
@@ -152,12 +162,12 @@
                             <table id="forecast" class="table align-middle mb-0 bg-white">
                                 <thead class="bg-light">
                                     <tr>
-                                        <th>Hora</th>
-                                        <th>Humedad [%]</th>
-                                        <th>Velocidad del viento [m/s]</th>
-                                        <th>Precipitación [--]</th>
-                                        <th>Presión [hPa]</th>
-                                        <th>Nubosidad [%]</th>
+                                        <th><img src="img/clock.png" alt="Icono" class="icono"/>Hora</th>
+                                        <th><img src="img/humidity.png" alt="Icono" class="icono"/>Humedad [%]</th>
+                                        <th><img src="img/wind.png" alt="Icono" class="icono"/>Velocidad del viento [m/s]</th>
+                                        <th><img src="img/rain.png" alt="Icono" class="icono"/>Precipitación [--]</th>
+                                        <th><img src="img/atmospheric-pressure.png" alt="Icono" class="icono"/>Presión [hPa]</th>
+                                        <th><img src="img/clouds.png" alt="Icono" class="icono"/>Nubosidad [%]</th>
                                     </tr>
                                 </thead>
                                 <tbody id="forecastbody">
@@ -171,11 +181,11 @@
     </section>
     <!-- Datos -->
     <!-- Tabla de mareas -->
-    <section class="p-4 text-right bg-light">
-        <h4 class="mb-3">
-            Mapa de monitoreo de amenaza de inundaciones bajo pronóstico de precipitaciones
-        </h4>
+    <section id="monitoreos" class="text-right bg-light">
         <div class="container">
+            <h4 class="mb-3">
+                Mapa de monitoreo de amenaza de inundaciones bajo pronóstico de precipitaciones
+            </h4>
             <div class="row row-cols-1 row-cols-md-1 g-3 mt-2">
                 <div class="col">
                     <div class="card">
